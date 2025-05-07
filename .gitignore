@@ -9,7 +9,6 @@ accounts/*
 thumbnails/*
 rclone/*
 tokens/*
-sabnzbd/*
 list_drives.txt
 cookies.txt
 downloads/*
