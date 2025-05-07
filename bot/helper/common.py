@@ -525,6 +525,7 @@ class TaskConfig:
         nextmsg = await self.client.get_messages(
             chat_id=self.message.chat.id, message_ids=nextmsg.id
         )
+        await nextmsg.delete()
         if self.message.from_user:
             nextmsg.from_user = self.user
         else:
@@ -566,6 +567,7 @@ class TaskConfig:
             nextmsg = await self.client.get_messages(
                 chat_id=self.message.chat.id, message_ids=nextmsg.id
             )
+            await nextmsg.delete()
             if self.message.from_user:
                 nextmsg.from_user = self.user
             else:
