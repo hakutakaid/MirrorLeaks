@@ -315,7 +315,7 @@ class TaskListener(TaskConfig):
             and Config.DATABASE_URL
         ):
             await database.rm_complete_task(self.message.link)
-        msg = f"<b>Name: </b><code>{escape(self.name)}</code>\n\n<b>Size: </b>{get_readable_file_size(self.size)}"
+        msg = f"<b>Name: </b><b>{escape(self.name)}</b>\n\n<b>Size: </b>{get_readable_file_size(self.size)}"
         LOGGER.info(f"Task Done: {self.name}")
         if self.is_leech:
             msg += f"\n<b>Total Files: </b>{folders}"
@@ -351,7 +351,7 @@ class TaskListener(TaskConfig):
                 if link:
                     buttons.url_button("☁️ Cloud Link", link)
                 else:
-                    msg += f"\n\nPath: <code>{rclone_path}</code>"
+                    msg += f"\n\nPath: <b>{rclone_path}</b>"
                 if rclone_path and Config.RCLONE_SERVE_URL and not self.private_link:
                     remote, rpath = rclone_path.split(":", 1)
                     url_path = rutils.quote(f"{rpath}")
@@ -373,7 +373,7 @@ class TaskListener(TaskConfig):
                             buttons.url_button("🌐 View Link", share_urls)
                 button = buttons.build_menu(2)
             else:
-                msg += f"\n\nPath: <code>{rclone_path}</code>"
+                msg += f"\n\nPath: <b>{rclone_path}</b>"
                 button = None
             msg += f"\n\n<b>cc: </b>{self.tag}"            
             #await send_message(self.message, msg, button)

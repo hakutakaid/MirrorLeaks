@@ -173,8 +173,8 @@ Custom Thumbnail <b>{thumbmsg}</b>
 Leech Split Size is <b>{split_size}</b>
 Equal Splits is <b>{equal_splits}</b>
 Media Group is <b>{media_group}</b>
-Leech Prefix is <code>{escape(lprefix)}</code>
-Leech Destination is <code>{leech_dest}</code>
+Leech Prefix is <b>{escape(lprefix)}</b>
+Leech Destination is <b>{leech_dest}</b>
 Leech by <b>{leech_method}</b> session
 HYBRID Leech is <b>{hybrid_leech}</b>
 Thumbnail Layout is <b>{thumb_layout}</b>
@@ -202,8 +202,8 @@ Thumbnail Layout is <b>{thumb_layout}</b>
             rcflags = "None"
         text = f"""<u>Rclone Settings for {name}</u>
 Rclone Config <b>{rccmsg}</b>
-Rclone Path is <code>{rccpath}</code>
-Rclone Flags is <code>{rcflags}</code>"""
+Rclone Path is <b>{rccpath}</b>
+Rclone Flags is <b>{rcflags}</b>"""
     elif stype == "gdrive":
         buttons.data_button("token.pickle", f"userset {user_id} menu TOKEN_PICKLE")
         buttons.data_button("Default Gdrive ID", f"userset {user_id} menu GDRIVE_ID")
@@ -234,8 +234,8 @@ Rclone Flags is <code>{rcflags}</code>"""
         index = user_dict["INDEX_URL"] if user_dict.get("INDEX_URL", False) else "None"
         text = f"""<u>Gdrive API Settings for {name}</u>
 Gdrive Token <b>{tokenmsg}</b>
-Gdrive ID is <code>{gdrive_id}</code>
-Index URL is <code>{index}</code>
+Gdrive ID is <b>{gdrive_id}</b>
+Index URL is <b>{index}</b>
 Stop Duplicate is <b>{sd_msg}</b>"""
     else:
         buttons.data_button("Leech", f"userset {user_id} leech")
@@ -305,13 +305,13 @@ Stop Duplicate is <b>{sd_msg}</b>"""
         text = f"""<u>Settings for {name}</u>
 Default Package is <b>{du}</b>
 Use <b>{tr}</b> token/config
-Upload Paths is <code>{upload_paths}</code>
+Upload Paths is <b>{upload_paths}</b>
 
-Name substitution is <code>{ns_msg}</code>
+Name substitution is <b>{ns_msg}</b>
 
-Excluded Extensions is <code>{ex_ex}</code>
+Excluded Extensions is <b>{ex_ex}</b>
 
-YT-DLP Options is <code>{ytopt}</code>
+YT-DLP Options is <b>{ytopt}</b>
 
 FFMPEG Commands is <b>{ffc}</b>"""
 
@@ -704,7 +704,7 @@ async def get_users_settings(_, message):
         for u, d in user_data.items():
             kmsg = f"\n<b>{u}:</b>\n"
             if vmsg := "".join(
-                f"{k}: <code>{v or None}</code>\n" for k, v in d.items()
+                f"{k}: <b>{v or None}</b>\n" for k, v in d.items()
             ):
                 msg += kmsg + vmsg
         if not msg:

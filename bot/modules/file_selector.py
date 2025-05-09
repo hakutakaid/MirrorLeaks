@@ -33,7 +33,7 @@ async def select(_, message):
         gid = msg[1]
         task = await get_task_by_gid(gid)
         if task is None:
-            await send_message(message, f"GID: <code>{gid}</code> Not Found.")
+            await send_message(message, f"GID: <b>{gid}</b> Not Found.")
             return
     elif reply_to_id := message.reply_to_message_id:
         async with task_dict_lock:

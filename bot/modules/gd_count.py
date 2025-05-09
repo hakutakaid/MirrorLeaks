@@ -19,7 +19,7 @@ async def count_node(_, message):
         link = reply_to.text.split(maxsplit=1)[0].strip()
 
     if is_gdrive_link(link):
-        msg = await send_message(message, f"Counting: <code>{link}</code>")
+        msg = await send_message(message, f"Counting: <b>{link}</b>")
         name, mime_type, size, files, folders = await sync_to_async(
             GoogleDriveCount().count, link, user.id
         )
@@ -27,7 +27,7 @@ async def count_node(_, message):
             await send_message(message, name)
             return
         await delete_message(msg)
-        msg = f"<b>Name: </b><code>{name}</code>"
+        msg = f"<b>Name: </b><b>{name}</b>"
         msg += f"\n\n<b>Size: </b>{get_readable_file_size(size)}"
         msg += f"\n\n<b>Type: </b>{mime_type}"
         if mime_type == "Folder":

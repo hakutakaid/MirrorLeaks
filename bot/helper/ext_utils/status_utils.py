@@ -186,7 +186,7 @@ async def get_readable_message(sid, is_user, page_no=1, status="All", page_step=
             msg += f"<b>{index + start_position}.<a href='{task.listener.message.link}'>{tstatus}</a>: </b>"
         else:
             msg += f"<b>{index + start_position}.{tstatus}: </b>"
-        msg += f"<code>{escape(f'{task.name()}')}</code>"
+        msg += f"<b>{escape(f'{task.name()}')}</b>"
         if task.listener.subname:
             msg += f"\n<i>{task.listener.subname}</i>"
         if (
@@ -225,7 +225,7 @@ async def get_readable_message(sid, is_user, page_no=1, status="All", page_step=
             msg += f" | <b>Time: </b>{task.seeding_time()}"
         else:
             msg += f"\n<b>Size: </b>{task.size()}"
-        msg += f"\n<b>Gid: </b><code>{task.gid()}</code>\n\n"
+        msg += f"\n<b>Gid: </b><b>{task.gid()}</b>\n\n"
 
     if len(msg) == 0:
         if status == "All":

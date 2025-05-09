@@ -150,20 +150,20 @@ async def rss_sub(_, message, pre_event):
             else:
                 size = 0
             msg += "<b>Subscribed!</b>"
-            msg += f"\n<b>Title: </b><code>{title}</code>\n<b>Feed Url: </b>{feed_link}"
+            msg += f"\n<b>Title: </b><b>{title}</b>\n<b>Feed Url: </b>{feed_link}"
             msg += f"\n<b>latest record for </b>{rss_d.feed.title}:"
             msg += (
-                f"\nName: <code>{last_title.replace('>', '').replace('<', '')}</code>"
+                f"\nName: <b>{last_title.replace('>', '').replace('<', '')}</b>"
             )
             try:
                 last_link = rss_d.entries[0]["links"][1]["href"]
             except IndexError:
                 last_link = rss_d.entries[0]["link"]
-            msg += f"\n<b>Link: </b><code>{last_link}</code>"
+            msg += f"\n<b>Link: </b><b>{last_link}</b>"
             if size:
                 msg += f"\nSize: {get_readable_file_size(size)}"
-            msg += f"\n<b>Command: </b><code>{cmd}</code>"
-            msg += f"\n<b>Filters:-</b>\ninf: <code>{inf}</code>\nexf: <code>{exf}</code>\n<b>sensitive: </b>{stv}"
+            msg += f"\n<b>Command: </b><b>{cmd}</b>"
+            msg += f"\n<b>Filters:-</b>\ninf: <b>{inf}</b>\nexf: <b>{exf}</b>\n<b>sensitive: </b>{stv}"
             async with rss_dict_lock:
                 if rss_dict.get(user_id, False):
                     rss_dict[user_id][title] = {
@@ -269,7 +269,7 @@ async def rss_update(_, message, pre_event, state):
         LOGGER.info(f"Rss link with Title(s): {updated} has been {state}d!")
         await send_message(
             message,
-            f"Rss links with Title(s): <code>{updated}</code> has been {state}d!",
+            f"Rss links with Title(s): <b>{updated}</b> has been {state}d!",
         )
         if rss_dict.get(user_id):
             await database.rss_update(user_id)
@@ -288,13 +288,13 @@ async def rss_list(query, start, all_users=False):
                 for index, (title, data) in enumerate(
                     list(titles.items())[start : 5 + start]
                 ):
-                    list_feed += f"\n\n<b>Title:</b> <code>{title}</code>\n"
-                    list_feed += f"<b>Feed Url:</b> <code>{data['link']}</code>\n"
-                    list_feed += f"<b>Command:</b> <code>{data['command']}</code>\n"
-                    list_feed += f"<b>Inf:</b> <code>{data['inf']}</code>\n"
-                    list_feed += f"<b>Exf:</b> <code>{data['exf']}</code>\n"
-                    list_feed += f"<b>Sensitive:</b> <code>{data.get('sensitive', False)}</code>\n"
-                    list_feed += f"<b>Paused:</b> <code>{data['paused']}</code>\n"
+                    list_feed += f"\n\n<b>Title:</b> <b>{title}</b>\n"
+                    list_feed += f"<b>Feed Url:</b> <b>{data['link']}</b>\n"
+                    list_feed += f"<b>Command:</b> <b>{data['command']}</b>\n"
+                    list_feed += f"<b>Inf:</b> <b>{data['inf']}</b>\n"
+                    list_feed += f"<b>Exf:</b> <b>{data['exf']}</b>\n"
+                    list_feed += f"<b>Sensitive:</b> <b>{data.get('sensitive', False)}</b>\n"
+                    list_feed += f"<b>Paused:</b> <b>{data['paused']}</b>\n"
                     list_feed += f"<b>User:</b> {data['tag'].replace('@', '', 1)}"
                     index += 1
                     if index == 5:
@@ -304,14 +304,14 @@ async def rss_list(query, start, all_users=False):
         async with rss_dict_lock:
             keysCount = len(rss_dict.get(user_id, {}).keys())
             for title, data in list(rss_dict[user_id].items())[start : 5 + start]:
-                list_feed += f"\n\n<b>Title:</b> <code>{title}</code>\n<b>Feed Url: </b><code>{data['link']}</code>\n"
-                list_feed += f"<b>Command:</b> <code>{data['command']}</code>\n"
-                list_feed += f"<b>Inf:</b> <code>{data['inf']}</code>\n"
-                list_feed += f"<b>Exf:</b> <code>{data['exf']}</code>\n"
+                list_feed += f"\n\n<b>Title:</b> <b>{title}</b>\n<b>Feed Url: </b><b>{data['link']}</b>\n"
+                list_feed += f"<b>Command:</b> <b>{data['command']}</b>\n"
+                list_feed += f"<b>Inf:</b> <b>{data['inf']}</b>\n"
+                list_feed += f"<b>Exf:</b> <b>{data['exf']}</b>\n"
                 list_feed += (
-                    f"<b>Sensitive:</b> <code>{data.get('sensitive', False)}</code>\n"
+                    f"<b>Sensitive:</b> <b>{data.get('sensitive', False)}</b>\n"
                 )
-                list_feed += f"<b>Paused:</b> <code>{data['paused']}</code>\n"
+                list_feed += f"<b>Paused:</b> <b>{data['paused']}</b>\n"
     buttons.data_button("Back", f"rss back {user_id}")
     buttons.data_button("Close", f"rss close {user_id}")
     if keysCount > 5:
@@ -358,8 +358,8 @@ async def rss_get(_, message, pre_event):
                         link = rss_d.entries[item_num]["links"][1]["href"]
                     except IndexError:
                         link = rss_d.entries[item_num]["link"]
-                    item_info += f"<b>Name: </b><code>{rss_d.entries[item_num]['title'].replace('>', '').replace('<', '')}</code>\n"
-                    item_info += f"<b>Link: </b><code>{link}</code>\n\n"
+                    item_info += f"<b>Name: </b><b>{rss_d.entries[item_num]['title'].replace('>', '').replace('<', '')}</b>\n"
+                    item_info += f"<b>Link: </b><b>{link}</b>\n\n"
                 item_info_ecd = item_info.encode()
                 if len(item_info_ecd) > 4000:
                     with BytesIO(item_info_ecd) as out_file:
@@ -781,12 +781,12 @@ async def rss_monitor():
                         if not feed_msg.startswith("/"):
                             feed_msg = f"/{feed_msg}"
                     else:
-                        feed_msg = f"<b>Name: </b><code>{item_title.replace('>', '').replace('<', '')}</code>"
-                        feed_msg += f"\n\n<b>Link: </b><code>{url}</code>"
+                        feed_msg = f"<b>Name: </b><b>{item_title.replace('>', '').replace('<', '')}</b>"
+                        feed_msg += f"\n\n<b>Link: </b><b>{url}</b>"
                         if size:
                             feed_msg += f"\n<b>Size: </b>{get_readable_file_size(size)}"
                     feed_msg += (
-                        f"\n<b>Tag: </b><code>{data['tag']}</code> <code>{user}</code>"
+                        f"\n<b>Tag: </b><b>{data['tag']}</b> <b>{user}</b>"
                     )
                     await send_rss(feed_msg, rss_chat_id, rss_topic_id)
                     feed_count += 1

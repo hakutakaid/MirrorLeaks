@@ -39,7 +39,7 @@ async def send(msg, message):
             await send_file(message, out_file)
     else:
         LOGGER.info(f"OUT: '{msg}'")
-        await send_message(message, f"<code>{msg}</code>")
+        await send_message(message, f"<b>{msg}</b>")
 
 
 @new_task

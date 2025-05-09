@@ -131,7 +131,7 @@ async def get_result(search_results, key, message, method):
         if method.startswith("api"):
             try:
                 if "name" in result.keys():
-                    msg += f"<code><a href='{result['url']}'>{escape(result['name'])}</a></code><br>"
+                    msg += f"<b><a href='{result['url']}'>{escape(result['name'])}</a></b><br>"
                 if "torrents" in result.keys():
                     for subres in result["torrents"]:
                         msg += f"<b>Quality: </b>{subres['quality']} | <b>Type: </b>{subres['type']} | "

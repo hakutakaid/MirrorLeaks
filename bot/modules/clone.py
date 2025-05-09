@@ -147,7 +147,7 @@ class Clone(TaskListener):
             drive = GoogleDriveClone(self)
             if files <= 10:
                 msg = await send_message(
-                    self.message, f"Cloning: <code>{self.link}</code>"
+                    self.message, f"Cloning: <b>{self.link}</b>"
                 )
             else:
                 msg = ""

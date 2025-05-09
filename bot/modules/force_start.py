@@ -23,7 +23,7 @@ async def remove_from_queue(_, message):
         gid = msg[2] if status else msg[1]
         task = await get_task_by_gid(gid)
         if task is None:
-            await send_message(message, f"GID: <code>{gid}</code> Not Found.")
+            await send_message(message, f"GID: <b>{gid}</b> Not Found.")
             return
     elif reply_to_id := message.reply_to_message_id:
         async with task_dict_lock:
@@ -33,14 +33,14 @@ async def remove_from_queue(_, message):
             return
     elif len(msg) in {1, 2}:
         msg = f"""Reply to an active Command message which was used to start the download/upload.
-<code>/{BotCommands.ForceStartCommand[0]}</code> fd (to remove it from download queue) or fu (to remove it from upload queue) or nothing to start remove it from both download and upload queue.
-Also send <code>/{BotCommands.ForceStartCommand[0]} GID</code> fu|fd or obly gid to force start by removeing the task rom queue!
+<b>/{BotCommands.ForceStartCommand[0]}</b> fd (to remove it from download queue) or fu (to remove it from upload queue) or nothing to start remove it from both download and upload queue.
+Also send <b>/{BotCommands.ForceStartCommand[0]} GID</b> fu|fd or obly gid to force start by removeing the task rom queue!
 Examples:
-<code>/{BotCommands.ForceStartCommand[1]}</code> GID fu (force upload)
-<code>/{BotCommands.ForceStartCommand[1]}</code> GID (force download and upload)
+<b>/{BotCommands.ForceStartCommand[1]}</b> GID fu (force upload)
+<b>/{BotCommands.ForceStartCommand[1]}</b> GID (force download and upload)
 By reply to task cmd:
-<code>/{BotCommands.ForceStartCommand[1]}</code> (force download and upload)
-<code>/{BotCommands.ForceStartCommand[1]}</code> fd (force download)
+<b>/{BotCommands.ForceStartCommand[1]}</b> (force download and upload)
+<b>/{BotCommands.ForceStartCommand[1]}</b> fd (force download)
 """
         await send_message(message, msg)
         return

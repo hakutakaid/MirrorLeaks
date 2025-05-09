@@ -216,8 +216,8 @@ class GoogleDriveList(GoogleDriveHelper):
         if items_no > LIST_LIMIT:
             msg += f" | Page: {int(page)}/{pages} | Page Step: {self.page_step}"
         msg += f"\n\nItem Type: {self.item_type}\nToken Path: {self.token_path}"
-        msg += f"\n\nCurrent ID: <code>{self.id}</code>"
-        msg += f"\nCurrent Path: <code>{('/').join(i['name'] for i in self.parents)}</code>"
+        msg += f"\n\nCurrent ID: <b>{self.id}</b>"
+        msg += f"\nCurrent Path: <b>{('/').join(i['name'] for i in self.parents)}</b>"
         msg += f"\nTimeout: {get_readable_time(self._timeout - (time() - self._time))}"
         await self._send_list_message(msg, button)
 

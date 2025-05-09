@@ -31,7 +31,7 @@ async def cancel(_, message):
         else:
             task = await get_task_by_gid(gid)
             if task is None:
-                await send_message(message, f"GID: <code>{gid}</code> Not Found.")
+                await send_message(message, f"GID: <b>{gid}</b> Not Found.")
                 return
     elif reply_to_id := message.reply_to_message_id:
         async with task_dict_lock:
@@ -42,7 +42,7 @@ async def cancel(_, message):
     elif len(msg) == 1:
         msg = (
             "Reply to an active Command message which was used to start the download"
-            f" or send <code>/{BotCommands.CancelTaskCommand[0]} GID</code> to cancel it!"
+            f" or send <b>/{BotCommands.CancelTaskCommand[0]} GID</b> to cancel it!"
         )
         await send_message(message, msg)
         return
