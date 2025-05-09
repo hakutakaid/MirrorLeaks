@@ -990,3 +990,8 @@ ETH Address:
 ```
 
 -----
+
+## docker rm $(docker ps -aq)
+## docker rmi $(docker images -q)
+## docker rmi -f $(docker images -q)
+## docker builder prune --all
