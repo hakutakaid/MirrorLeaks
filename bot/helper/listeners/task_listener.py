@@ -407,7 +407,7 @@ class TaskListener(TaskConfig):
             count = len(task_dict)
         await self.remove_from_same_dir()
         msg = f"{self.tag} Download: {escape(str(error))}"
-        await send_message(self.message, msg, button)
+        #await send_message(self.message, msg, button)
         if count == 0:
             await self.clean()
         else:
