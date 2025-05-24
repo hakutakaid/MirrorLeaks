@@ -1055,7 +1055,7 @@ sudo docker run --network host mltb
 docker ps
 ```
 ```
-dokcer stop UID
+docker stop UID
 ```
 ```
 docker rm $(docker ps -aq)
